@@ -35,6 +35,8 @@ mako\Package::init("marty");
 
 As you are probably going to use Smarty as your preferred template language, I suggest you add marty to the auto-initialize list.
 
+If Marty is initialized, it will render any view with the extension ".smarty.php". While this is not the _default_ extension for Smarty files (which is .tpl) but it is the best we can do while avoiding conflicts with Mako.
+
 To do
 -----
 
