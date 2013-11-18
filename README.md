@@ -1,4 +1,46 @@
-marty
+Marty
 =====
 
-Smarty for the Mako php framework
+Marty is a simple Smarty view renderer for the Mako framework.
+
+Requirements
+------------
+
+Marty has been tested on mako 3.6.2. Any other version _may_ work, but has not been tried.
+
+Installation
+------------
+
+Marty can be added to your Mako project using composer! Just add it to your requirements
+
+```js
+{
+	/* Stuff */
+	require: {
+		/* Your other requirements */
+		"solution-web/marty": "*"
+	}
+	/* The rest of your composer.json
+}
+```
+
+Usage
+-----
+
+Once installed, you need to initialize it first. You can do this manually:
+
+```php
+mako\Package::init("marty");
+```
+
+As you are probably going to use Smarty as your preferred template language, I suggest you add marty to the auto-initialize list.
+
+To do
+-----
+
+If I find the time, I would like to add support for:
+
+* Smarty config files.
+* Smarty caching.
+* Smarty dynamic cache control.
+* Anything else I fail to think of.
