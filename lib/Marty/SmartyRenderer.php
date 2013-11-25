@@ -24,10 +24,10 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 		$this->smarty = MartyConfig::getSmartyInstance();
 
 		// Assign the view-variables.
-		$this->assignVariables($variables);
+		$this->assignVariables($this->variables);
 
 		// By lack of a better way, assign the globals as well.
-		$this->assignVariables($globalVariables);
+		$this->assignVariables($this->globalVariables);
 
 		return $this->smarty->fetch($this->templateName);
 	}
