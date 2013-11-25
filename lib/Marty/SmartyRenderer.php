@@ -2,8 +2,6 @@
 
 namespace Marty;
 
-use \mako\Config;
-
 class SmartyRenderer implements \mako\view\renderer\RendererInterface
 {
 
