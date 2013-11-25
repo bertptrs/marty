@@ -29,7 +29,7 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 		// By lack of a better way, assign the globals as well.
 		$this->assignVariables($this->globalVariables);
 
-		return $this->smarty->fetch($this->templateName);
+		return $this->smarty->fetch($this->templateName, MartyConfig::getCacheId());
 	}
 
 	private function assignVariables($variables)
