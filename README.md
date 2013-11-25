@@ -20,7 +20,7 @@ Marty can be added to your Mako project using composer! Just add it to your requ
 		/* Your other requirements */
 		"solution-web/marty": "*"
 	}
-	/* The rest of your composer.json
+	/* The rest of your composer.json*/
 }
 ```
 
