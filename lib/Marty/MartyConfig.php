@@ -62,7 +62,7 @@ class MartyConfig
 	private static function init()
 	{
 		static::$template_dir = Config::get("marty::smarty.templateDir");
-		static::$compile_dir = Config::get("marty::smarty.cacheDir");
+		static::$compile_dir = Config::get("marty::smarty.compileDir");
 		static::$cache_dir = Config::get("marty::smarty.cacheDir");
 		static::$config_dir = Config::get("marty::smarty.configDir");
 		static::$caching = Config::get("marty::smarty.caching");
