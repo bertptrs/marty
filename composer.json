@@ -16,6 +16,9 @@
 		"composer/installers": "*",
 		"smarty/smarty": "3.*"
 	},
+	"require-dev": {
+		"mako/framework": "~3.6"
+	},
 	"autoload": {
 		"psr-0": {
 			"Marty\\": "lib"
