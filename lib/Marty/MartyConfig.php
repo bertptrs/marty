@@ -146,7 +146,7 @@ class MartyConfig
 	{
 		foreach (static::$registered_plugins as $name => $details)
 		{
-			explode($details);
+			extract($details);
 			$smarty->registerPlugin($type, $name, $callback, $cachable, $cache_attrs);
 		}
 	}
