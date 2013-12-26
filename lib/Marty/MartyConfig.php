@@ -93,6 +93,8 @@ class MartyConfig
 	 */
 	private static $registered_plugins = array();
 
+	private static $registered_classes = array();
+
 	/**
 	 * Dummy constructor
 	 *
@@ -138,6 +140,7 @@ class MartyConfig
 		$smarty->setCacheLifetime(static::$cache_lifetime);
 
 		static::registerPlugins($smarty);
+		static::registerClasses($smarty);
 
 		return $smarty;
 	}
@@ -149,6 +152,12 @@ class MartyConfig
 			extract($details);
 			$smarty->registerPlugin($type, $name, $callback, $cachable, $cache_attrs);
 		}
+	}
+
+	private static function registerClasses(Smarty &$smarty)
+	{
+		foreach (static::$registered_classes as $k => $v)
+			$smarty->registerClass($k, $v);
 	}
 
 	/**
@@ -399,6 +408,17 @@ class MartyConfig
 			"cachable"    => $cachable,
 			"cache_attrs" => $cache_attrs,
 		);
+	}
+
+	/**
+	 * Register a class for static use by smarty.
+	 *
+	 * @param string $name
+	 * @param string $implementation
+	 */
+	public static function registerClass($name, $implementation)
+	{
+		static::$registered_classes[$name] = $implementation;
 	}
 
 	/**
