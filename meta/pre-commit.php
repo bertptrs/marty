@@ -39,7 +39,7 @@ foreach ($output as $file) {
 
 		if ($return == 0) {
 
-			exec("php vendor/bin/phpmd {$fileName} text all", $phpmd_output, $return);
+			exec("php vendor/bin/phpmd {$fileName} text cleancode,codesize,controversial,naming", $phpmd_output, $return);
 			if ($return == 0) {
 
 				/**
