@@ -11,6 +11,7 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 	private $templateName;
 	private $variables;
 	private $globalVariables;
+	private $smarty;
 
 	public function __construct($view, array $variables, array $globalVariables)
 	{
@@ -29,7 +30,7 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 	 */
 	public function render()
 	{
-		$this->smarty = MartyConfig::getSmartyInstance();
+		$this->smarty = $this->getInstance();
 
 		// Assign the view-variables.
 		$this->assignVariables($this->variables);
