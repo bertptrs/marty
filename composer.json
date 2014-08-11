@@ -13,8 +13,8 @@
 	],
 	"require": {
 		"php": ">=5.3.1",
-		"composer/installers": "*",
-		"smarty/smarty": "3.*",
+		"composer/installers": ">=1.0.1,<2",
+		"smarty/smarty": "~3",
 		"mako/framework": "~3.6"
 	},
 	"autoload": {
