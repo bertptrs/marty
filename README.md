@@ -40,7 +40,7 @@ If Marty is initialized, it will render any view with the extension ".smarty.php
 Configuration
 -------------
 
-Configuration can be done by changing the `marty::smarty` configuration. Just refer to the [http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration](Mako documentation on package configuration) for details.
+Configuration can be done by changing the `marty::smarty` configuration. Just refer to the [Mako documentation on package configuration](http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration) for details.
 
 The configuration properties are as follows:
 
@@ -48,7 +48,7 @@ The configuration properties are as follows:
 |------------------------|----------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|
 | smarty.templateDir     | string   | The location to find smarty templates.              | Your `app/views` directory.                                                                          |
 | smarty.compileDir      | string   | The location to store compiled templates.           | A new directory `smarty` in your `app/storage` directory.                                            |
-| smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | The Smarty plugins and sysplugins directories. Refer to [http://www.smarty.net/docs/en/plugins.tpl](the smarty documentation on how to use this.) |
+| smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | The Smarty plugins and sysplugins directories. Refer to [the Smarty documentation for info on how to use this](http://www.smarty.net/docs/en/plugins.tpl)                                              |
 
 To do
 -----
