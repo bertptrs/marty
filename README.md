@@ -37,6 +37,19 @@ As you are probably going to use Smarty as your preferred template language, I s
 
 If Marty is initialized, it will render any view with the extension ".smarty.php". While this is not the _default_ extension for Smarty files (which is .tpl) but it is the best we can do while avoiding conflicts with Mako.
 
+Configuration
+-------------
+
+Configuration can be done by changing the `marty::smarty` configuration. Just refer to the [http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration](Mako documentation on package configuration) for details.
+
+The configuration properties are as follows:
+
+| Configuration property | Type     | Description                                         | Default                                                                                              |
+|------------------------|----------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|
+| smarty.templateDir     | string   | The location to find smarty templates.              | Your `app/views` directory.                                                                          |
+| smarty.compileDir      | string   | The location to store compiled templates.           | A new directory `smarty` in your `app/storage` directory.                                            |
+| smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | The Smarty plugins and sysplugins directories. Refer to [http://www.smarty.net/docs/en/plugins.tpl](the smarty documentation on how to use this.) |
+
 To do
 -----
 

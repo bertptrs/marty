@@ -14,9 +14,7 @@
 	"require": {
 		"php": ">=5.3.1",
 		"composer/installers": "*",
-		"smarty/smarty": "3.*"
-	},
-	"require-dev": {
+		"smarty/smarty": "3.*",
 		"mako/framework": "~3.6"
 	},
 	"autoload": {

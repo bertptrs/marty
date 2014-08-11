@@ -2,10 +2,12 @@
 
 namespace Marty;
 
+use Smarty;
+use mako\Config;
+
 class SmartyRenderer implements \mako\view\renderer\RendererInterface
 {
 
-	private $smarty;
 	private $templateName;
 	private $variables;
 	private $globalVariables;
@@ -19,6 +21,12 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 		$this->templateName = $view;
 	}
 
+	/**
+	 * Render the view into a string.
+	 *
+	 * @return string The resulting view.
+	 * @throws SmartyException should anything fail with template parsing.
+	 */
 	public function render()
 	{
 		$this->smarty = MartyConfig::getSmartyInstance();
@@ -32,7 +40,32 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
 		return $this->smarty->fetch($this->templateName, MartyConfig::getCacheId());
 	}
 
-	private function assignVariables($variables)
+	/**
+	 * Set up a new Smarty instance.
+	 *
+	 * Creates the normal configuration and returns it.
+	 *
+	 * @return Smarty a Smarty instance.
+	 */
+	private function getInstance() {
+		$smarty = new Smarty();
+		$smarty->setCompileDir(Config::get("marty::smarty.compileDir"));
+		$smarty->setTemplateDir(Config::get("marty::smarty.templateDir"));
+		$smarty->setCaching(Smarty::CACHING_OFF);
+		$smarty->setCompileCheck(true);
+		foreach(Config::get("marty::smarty.pluginDirs") as $dir) {
+			$smarty->addPluginDir($dir);
+		}
+
+		return $smarty;
+	}
+
+	/**
+	 * Assign a bunch of variables to Smarty.
+	 *
+	 * @param $variables array Array of variables to assign.
+	 */
+	private function assignVariables(array $variables)
 	{
 		foreach ($variables as $key => $value)
 		{
