@@ -1,14 +1,14 @@
 <?php
 
-namespace marty;
+namespace Marty;
 
 use mako\application\services\Service;
-use marty\SmartyRenderer;
+use Marty\SmartyRenderer;
 
 class MartyRendererService extends Service {
 
 	public function register() {
-		$this->container->get("view")->registerViewRenderer(".tpl",
+		$this->container->get("view")->registerRenderer(".tpl",
 			"\marty\SmartyRenderer");
 		SmartyRenderer::loadConfig($this->get("config"));
 	}
