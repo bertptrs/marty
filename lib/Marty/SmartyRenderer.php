@@ -34,8 +34,7 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
 	 * @return string The resulting view.
 	 * @throws SmartyException should anything fail with template parsing.
 	 */
-    public function render()
-    {
+    public function render() {
         $this->smarty = $this->getInstance();
 
         // Assign the view-variables.
@@ -44,7 +43,7 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
         return $this->smarty->fetch($this->templateName);
 	}
 	
-	public function assign($key, $value) {
+	public function assign($key, $value){
 		$this->variables[$key] = $value;
 	}
 
@@ -55,19 +54,18 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
 	 *
 	 * @return Smarty a Smarty instance.
 	 */
-    private function getInstance()
-    {
+    private function getInstance() {
         $smarty = new Smarty();
 
-        $smarty->setCompileDir($this->config->get("marty::smarty.compileDir"));
+        $smarty->setCompileDir(static::$config->get("marty::smarty.compileDir"));
 		if ($this->cachePath == null) {
-			$smarty->setTemplateDir($this->config->get("marty::smarty.templateDir"));
+			$smarty->setTemplateDir(static::$config->get("marty::smarty.templateDir"));
 		} else {
 			$smarty->setTemplateDir($this->cachePath);
 		}
         $smarty->setCaching(Smarty::CACHING_OFF);
         $smarty->setCompileCheck(true);
-        $smarty->addPluginsDir($this->config->get("marty::smarty.pluginDirs"));
+        $smarty->addPluginsDir(static::$config->get("marty::smarty.pluginDirs"));
 
         return $smarty;
     }
