@@ -59,15 +59,15 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
     {
         $smarty = new Smarty();
 
-        $smarty->setCompileDir(Config::get("marty::smarty.compileDir"));
+        $smarty->setCompileDir($this->config->get("marty::smarty.compileDir"));
 		if ($this->cachePath == null) {
-			$smarty->setTemplateDir(Config::get("marty::smarty.templateDir"));
+			$smarty->setTemplateDir($this->config->get("marty::smarty.templateDir"));
 		} else {
 			$smarty->setTemplateDir($this->cachePath);
 		}
         $smarty->setCaching(Smarty::CACHING_OFF);
         $smarty->setCompileCheck(true);
-        $smarty->addPluginsDir(Config::get("marty::smarty.pluginDirs"));
+        $smarty->addPluginsDir($this->config->get("marty::smarty.pluginDirs"));
 
         return $smarty;
     }
