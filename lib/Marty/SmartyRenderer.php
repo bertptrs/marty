@@ -3,23 +3,29 @@
 namespace Marty;
 
 use Smarty;
-use mako\Config;
+use mako\config\Config;
 
-class SmartyRenderer implements \mako\view\renderer\RendererInterface
+class SmartyRenderer implements \mako\view\renderers\RendererInterface
 {
 
     private $templateName;
     private $variables;
-    private $globalVariables;
-    private $smarty;
+	private $globalVariables;
+	private $cachePath;
+	private $smarty;
+	/**
+	 * Configuration handle.
+	 */
+	private static $config;
 
-    public function __construct($view, array $variables, array $globalVariables)
+    public function __construct($view, array $variables)
     {
 
         $this->variables = $variables;
-        $this->globalVariables = $globalVariables;
 
-        $this->templateName = $view;
+		$this->templateName = $view;
+
+		$this->cachePath = null;
     }
 
     /**
@@ -35,11 +41,12 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
         // Assign the view-variables.
         $this->assignVariables($this->variables);
 
-        // By lack of a better way, assign the globals as well.
-        $this->assignVariables($this->globalVariables);
-
         return $this->smarty->fetch($this->templateName);
-    }
+	}
+	
+	public function assign($key, $value) {
+		$this->variables[$key] = $value;
+	}
 
     /**
 	 * Set up a new Smarty instance.
@@ -53,7 +60,11 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
         $smarty = new Smarty();
 
         $smarty->setCompileDir(Config::get("marty::smarty.compileDir"));
-        $smarty->setTemplateDir(Config::get("marty::smarty.templateDir"));
+		if ($this->cachePath == null) {
+			$smarty->setTemplateDir(Config::get("marty::smarty.templateDir"));
+		} else {
+			$smarty->setTemplateDir($this->cachePath);
+		}
         $smarty->setCaching(Smarty::CACHING_OFF);
         $smarty->setCompileCheck(true);
         $smarty->addPluginsDir(Config::get("marty::smarty.pluginDirs"));
@@ -72,4 +83,17 @@ class SmartyRenderer implements \mako\view\renderer\RendererInterface
             $this->smarty->assign($key, $value);
         }
     }
+
+	public function setCachePath($path) {
+		$this->cachePath = $path;
+	}
+
+	/**
+	 * Load a static configuration reference
+	 *
+	 * @param Config $config configuration instance
+	 */
+	public static function loadConfig(Config $config) {
+		static::$config = $config;
+	}
 }
