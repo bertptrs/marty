@@ -1,6 +1,6 @@
 <?php
 
-namespace marty
+namespace marty;
 
 use mako\application\Package;
 use marty\SmartyRenderer;
