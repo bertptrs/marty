@@ -36,7 +36,7 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
 			$smarty->assign($key, $value);
 		}
 
-        return $smarty->fetch();
+        return $smarty->fetch($__view__);
 	}
 	
     /**
