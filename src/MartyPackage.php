@@ -7,6 +7,8 @@ use marty\SmartyRenderer;
 
 class MartyPackage extends Package {
 
+	protected $packageName = "marty";
+
 	protected function bootstrap() {
 		$config = $this->container->get("config");
 
