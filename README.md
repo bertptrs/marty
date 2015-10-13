@@ -1,15 +1,12 @@
-Marty
-=====
+# Marty
 
 Marty is a simple Smarty view renderer for the Mako framework.
 
-Requirements
-------------
+## Requirements
 
 Marty has been tested on mako 3.6.2. Any other version _may_ work, but has not been tried.
 
-Installation
-------------
+## Installation
 
 Marty can be added to your Mako project using composer! Just add it to your requirements
 
@@ -18,27 +15,36 @@ Marty can be added to your Mako project using composer! Just add it to your requ
 	/* Stuff */
 	require: {
 		/* Your other requirements */
-		"solution-web/marty": "*"
+		"bertptrs/marty": "*"
 	}
 	/* The rest of your composer.json*/
 }
 ```
 
-Usage
------
+## Usage
 
-Once installed, you need to initialize it first. You can do this manually:
+Once installed, you will need to add it to your packages list. You do this by adding it to the "Web" packages. This is located in the file `app/config/application.php`.
 
 ```php
-mako\Package::init("marty");
+<?php
+return [
+	// …
+	'packages' => [
+		// …
+		'web' => [
+			'marty\MartyPackage',
+		],
+	],
+	// …
+];
+?>
 ```
 
 As you are probably going to use Smarty as your preferred template language, I suggest you add marty to the auto-initialize list.
 
 If Marty is initialized, it will render any view with the extension ".smarty.php". While this is not the _default_ extension for Smarty files (which is .tpl) but it is the best we can do while avoiding conflicts with Mako.
 
-Configuration
--------------
+### Configuration
 
 Configuration can be done by changing the `marty::smarty` configuration. Just refer to the [Mako documentation on package configuration](http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration) for details.
 
@@ -50,8 +56,7 @@ The configuration properties are as follows:
 | smarty.compileDir      | string   | The location to store compiled templates.           | A new directory `smarty` in your `app/storage` directory.                                            |
 | smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | The Smarty plugins and sysplugins directories. Refer to [the Smarty documentation for info on how to use this](http://www.smarty.net/docs/en/plugins.tpl)                                              |
 
-To do
------
+## To do
 
 If I find the time, I would like to add support for:
 

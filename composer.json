@@ -1,5 +1,5 @@
 {
-	"name": "solution-web/marty",
+	"name": "bertptrs/marty",
 	"type": "mako-package",
 	"description": "Smarty view renderer for the Mako framework",
 	"keywords": ["mako", "smarty", "template"],
