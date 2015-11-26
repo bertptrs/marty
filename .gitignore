@@ -2,3 +2,4 @@ composer.lock
 vendor
 *.swp
 /nbproject/
+.php_cs.cache
