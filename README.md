@@ -1,10 +1,12 @@
 # Marty
 
+[![Build Status](https://travis-ci.org/bertptrs/marty.svg)](https://travis-ci.org/bertptrs/marty)
+
 Marty is a simple Smarty view renderer for the Mako framework.
 
 ## Requirements
 
-Marty has been tested on mako 3.6.2. Any other version _may_ work, but has not been tried.
+Marty has been tested on mako 4.5. Any other version _may_ work, but has not been tried.
 
 ## Installation
 
