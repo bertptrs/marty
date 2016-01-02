@@ -16,11 +16,13 @@
 	},
 	"require-dev": {
 		"phpmd/phpmd": "~2",
-		"fabpot/php-cs-fixer": "*"
+		"fabpot/php-cs-fixer": "*",
+		"phpunit/phpunit": "*"
 	},
 	"autoload": {
 		"psr-4": {
-			"marty\\": "src"
+			"marty\\": "src",
+			"marty\\tests\\": "tests"
 		}
 	}
 }
