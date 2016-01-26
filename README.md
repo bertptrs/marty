@@ -1,6 +1,6 @@
 # Marty
 
-[![Build Status](https://travis-ci.org/bertptrs/marty.svg)](https://travis-ci.org/bertptrs/marty)
+[![Build Status](https://travis-ci.org/bertptrs/marty.svg)](https://travis-ci.org/bertptrs/marty) [![Latest Stable Version](https://poser.pugx.org/bertptrs/marty/v/stable)](https://packagist.org/packages/bertptrs/marty) [![Total Downloads](https://poser.pugx.org/bertptrs/marty/downloads)](https://packagist.org/packages/bertptrs/marty) [![License](https://poser.pugx.org/bertptrs/marty/license)](https://packagist.org/packages/bertptrs/marty)
 
 Marty is a simple Smarty view renderer for the Mako framework.
 
