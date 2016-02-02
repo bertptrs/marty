@@ -56,7 +56,7 @@ class SmartyRendererTest extends PHPUnit_Framework_TestCase
         $configMap  = [
             "marty::smarty.templateDir" => dirname(__DIR__) . "/resources/views",
             "marty::smarty.compileDir" => static::$smartyDir,
-            "marty::smarty.pluginDirs" => [],
+            "marty::smarty.pluginDirs" => [dirname(__DIR__) . "/resources/plugins"],
         ];
         $mockConfig->expects($this->any())->method("get")->will(
             $this->returnCallback(function ($arg) use ($configMap) {
