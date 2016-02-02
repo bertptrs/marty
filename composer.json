@@ -2,7 +2,7 @@
 	"name": "bertptrs/marty",
 	"description": "Smarty view renderer for the Mako framework",
 	"keywords": ["mako", "smarty", "template"],
-	"homepage": "http://solution-web.nl/",
+	"homepage": "http://bertptrs.nl/marty/",
 	"license": "MIT",
 	"authors": [
 		{
