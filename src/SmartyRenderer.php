@@ -2,15 +2,13 @@
 
 namespace marty;
 
-use Smarty;
 use mako\config\Config;
+use mako\view\renderers\RendererInterface;
+use Smarty;
+use SmartyException;
 
-class SmartyRenderer implements \mako\view\renderers\RendererInterface
+class SmartyRenderer implements RendererInterface
 {
-    private $templateName;
-    private $variables;
-    private $globalVariables;
-    private $cachePath;
     /**
      * Configuration handle.
      */
@@ -19,7 +17,6 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
     public function __construct(Config $config)
     {
         $this->config = $config;
-        $this->cachePath = null;
     }
 
     /**
@@ -38,7 +35,7 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
 
         return $smarty->fetch($__view__);
     }
-    
+
     /**
      * Set up a new Smarty instance.
      *
@@ -53,21 +50,12 @@ class SmartyRenderer implements \mako\view\renderers\RendererInterface
         $config = $this->config;
         $smarty->setTemplateDir($config->get("marty::smarty.templateDir"));
 
-        if ($this->cachePath == null) {
-            $smarty->setCompileDir($config->get("marty::smarty.compileDir"));
-        } else {
-            $smarty->setCompileDir($this->cachePath);
-        }
+        $smarty->setCompileDir($config->get("marty::smarty.compileDir"));
 
         $smarty->setCaching(Smarty::CACHING_OFF);
         $smarty->setCompileCheck(true);
         $smarty->addPluginsDir($config->get("marty::smarty.pluginDirs"));
 
         return $smarty;
-    }
-
-    public function setCachePath($path)
-    {
-        $this->cachePath = $path;
     }
 }
