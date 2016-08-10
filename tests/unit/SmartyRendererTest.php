@@ -6,88 +6,28 @@ use marty\SmartyRenderer;
 use PHPUnit_Framework_TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Smarty;
 
 class SmartyRendererTest extends PHPUnit_Framework_TestCase
 {
-    private static $smartyDir;
+    private static $smarty;
 
-    /**
-     * Create a smarty compile directory in the temp dir.
-     */
     public static function setUpBeforeClass()
     {
         parent::setUpBeforeClass();
-        static::$smartyDir = sys_get_temp_dir() . "/marty_test_compile/";
-        mkdir(static::$smartyDir, 0777, true);
-    }
+        $smarty = new Smarty();
+        $smarty->setTemplateDir(dirname(__DIR__)."/resources/views/");
+        $smarty->setCompileDir(sys_get_temp_dir().uniqid("/martycompiletest_"));
+        $smarty->setPluginsDir(dirname(__DIR__)."/resources/plugins");
 
-    /**
-     * Remove the smarty temp dir.
-     */
-    public static function tearDownAfterClass()
-    {
-        $files = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator(static::$smartyDir,
-            RecursiveDirectoryIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach ($files as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getRealPath);
-            } else {
-                unlink($file->getRealPath());
-            }
-        }
-        rmdir(static::$smartyDir);
-        parent::tearDownAfterClass();
-    }
-
-    /**
-     * Get a mock object for the config.
-     *
-     * This mock implements the neccessary parameters for Smarty to start.
-     *
-     * @return mako\config\Config; Description
-     */
-    private function getConfigInstance()
-    {
-        $mockConfig = $this->getMockBuilder('mako\config\Config')->disableOriginalConstructor()->getMock();
-        $configMap  = [
-            "marty::smarty.templateDir" => dirname(__DIR__) . "/resources/views",
-            "marty::smarty.compileDir" => static::$smartyDir,
-            "marty::smarty.pluginDirs" => [dirname(__DIR__) . "/resources/plugins"],
-        ];
-        $mockConfig->expects($this->any())->method("get")->will(
-            $this->returnCallback(function ($arg) use ($configMap) {
-                if (array_key_exists($arg, $configMap)) {
-                    return $configMap[$arg];
-                } else {
-                    throw new \InvalidArgumentException("No such key: $arg");
-                }
-            })
-        );
-
-        return $mockConfig;
-    }
-
-    /**
-     * Test whether we can actually produce a valid instance.
-     */
-    public function testGetInstance()
-    {
-        $instance = new SmartyRenderer($this->getConfigInstance());
-
-        $this->assertInstanceOf('marty\SmartyRenderer', $instance);
-
-        return $instance;
+        static::$smarty = $smarty;
     }
 
     public function renderProvider()
     {
         $files   = [];
-        $basedir = dirname(__DIR__) . "/resources/views/";
-        $it      = new RecursiveIteratorIterator(new \RecursiveDirectoryIterator($basedir));
+        $basedir = dirname(__DIR__)."/resources/views/";
+        $it      = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basedir));
         foreach ($it as $template) {
             if (substr($template->getRealPath(), -4) != ".tpl") {
                 // Not a template.
@@ -109,7 +49,7 @@ class SmartyRendererTest extends PHPUnit_Framework_TestCase
      */
     public function testRender($templateFile)
     {
-        $instance  = new SmartyRenderer($this->getConfigInstance());
+        $instance  = new SmartyRenderer(static::$smarty);
         $variables = $this->getTemplateVariables($templateFile);
 
         $result   = $instance->render($templateFile . ".tpl", $variables);

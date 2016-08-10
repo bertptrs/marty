@@ -24,21 +24,16 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
     public function testBootstrap()
     {
         // Create a viewfactory that verifies the registerRenderer method is called.
-        $viewFactory = $this->getMockBuilder('mako\view\ViewFactory')
-            ->disableOriginalConstructor()->getMock();
+        $viewFactory = $this->createMock('mako\view\ViewFactory');
         $viewFactory->expects($this->once())->method('registerRenderer')
             ->with(
                 $this->equalTo('.tpl'),
-                $this->callback(function($subject) {
-                    return is_callable($subject);
-                })
+                $this->anything()
             );
 
         // Create a container to return our viewFactory.
-        $container = $this->getMockBuilder('mako\syringe\Container')
-            ->disableOriginalConstructor()->getMock();
-        $container->method("get")->will($this->returnCallback(function($item) use ($viewFactory)
-        {
+        $container = $this->createMock('mako\syringe\Container');
+        $container->expects($this->once())->method("get")->will($this->returnCallback(function ($item) use ($viewFactory) {
             switch ($item) {
             case 'config':
                 return null;
@@ -50,6 +45,9 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
                 $this->fail("Unneccsary item requested: $item");
             }
         }));
+        // Ensure that it the Smarty class is registered.
+        $container->expects($this->once())->method('register')
+            ->with($this->equalTo('Smarty'), $this->anything());// Cannot verify that is is a callable.
 
         $package = new MartyPackage($container);
         // Use reflection to call protected method.

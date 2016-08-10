@@ -2,21 +2,18 @@
 
 namespace marty;
 
-use mako\config\Config;
 use mako\view\renderers\RendererInterface;
 use Smarty;
 use SmartyException;
 
 class SmartyRenderer implements RendererInterface
 {
-    /**
-     * Configuration handle.
-     */
-    private $config;
 
-    public function __construct(Config $config)
+    private $smarty;
+
+    public function __construct(Smarty $smarty)
     {
-        $this->config = $config;
+        $this->smarty = $smarty;
     }
 
     /**
@@ -27,35 +24,13 @@ class SmartyRenderer implements RendererInterface
      */
     public function render($__view__, array $variables)
     {
-        $smarty = $this->getInstance();
+        $smarty = $this->smarty;
+        $smarty->clearAllAssign();
 
         foreach ($variables as $key => $value) {
             $smarty->assign($key, $value);
         }
 
         return $smarty->fetch($__view__);
-    }
-
-    /**
-     * Set up a new Smarty instance.
-     *
-     * Creates the normal configuration and returns it.
-     *
-     * @return Smarty a Smarty instance.
-     */
-    private function getInstance()
-    {
-        $smarty = new Smarty();
-
-        $config = $this->config;
-        $smarty->setTemplateDir($config->get("marty::smarty.templateDir"));
-
-        $smarty->setCompileDir($config->get("marty::smarty.compileDir"));
-
-        $smarty->setCaching(Smarty::CACHING_OFF);
-        $smarty->setCompileCheck(true);
-        $smarty->addPluginsDir($config->get("marty::smarty.pluginDirs"));
-
-        return $smarty;
     }
 }
