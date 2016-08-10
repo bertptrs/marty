@@ -24,7 +24,8 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
     public function testBootstrap()
     {
         // Create a viewfactory that verifies the registerRenderer method is called.
-        $viewFactory = $this->createMock('mako\view\ViewFactory');
+        $viewFactory = $this->getMockBuilder('mako\view\ViewFactory')
+            ->disableOriginalConstructor()->getMock();
         $viewFactory->expects($this->once())->method('registerRenderer')
             ->with(
                 $this->equalTo('.tpl'),
@@ -32,7 +33,8 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
             );
 
         // Create a container to return our viewFactory.
-        $container = $this->createMock('mako\syringe\Container');
+        $container = $this->getMockBuilder('mako\syringe\Container')
+            ->disableOriginalConstructor()->getMock();
         $container->expects($this->once())->method("get")->will($this->returnCallback(function ($item) use ($viewFactory) {
             switch ($item) {
             case 'config':
