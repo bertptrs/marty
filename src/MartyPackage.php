@@ -3,8 +3,9 @@
 namespace marty;
 
 use mako\application\Package;
+use mako\config\Config;
+use mako\syringe\Container;
 use Smarty;
-use Symfony\CS\Config\Config;
 
 class MartyPackage extends Package
 {
@@ -26,15 +27,15 @@ class MartyPackage extends Package
     {
         $this->container->register('Smarty',
             function (Container $container) {
-            return $container->call(function (Config $config) {
+            return $container->call(function (Config $config, PluginLoader $loader) {
                     $smarty = new Smarty();
                     $smarty->setTemplateDir($config->get("marty::smarty.templateDir"));
 
                     $smarty->setCompileDir($config->get("marty::smarty.compileDir"));
 
                     $smarty->setCaching(Smarty::CACHING_OFF);
-                    $smarty->setCompileCheck(true);
-                    $smarty->addPluginsDir($config->get("marty::smarty.pluginDirs"));
+
+                    $loader->loadPlugins($config->get('marty::smarty.pluginDirs'), $smarty);
 
                     return $smarty;
                 });

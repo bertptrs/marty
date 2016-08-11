@@ -18,6 +18,8 @@ class SmartyRendererTest extends PHPUnit_Framework_TestCase
         $smarty = new Smarty();
         $smarty->setTemplateDir(dirname(__DIR__)."/resources/views/");
         $smarty->setCompileDir(sys_get_temp_dir().uniqid("/martycompiletest_"));
+
+        // Don't use the plugin loader for these tests.
         $smarty->setPluginsDir(dirname(__DIR__)."/resources/plugins");
 
         static::$smarty = $smarty;
