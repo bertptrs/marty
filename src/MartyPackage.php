@@ -20,7 +20,9 @@ class MartyPackage extends Package
     private function registerViewRenderer()
     {
         $this->container->get('view')
-            ->registerRenderer('.tpl', 'marty\SmartyRenderer');
+            ->registerRenderer('.tpl', function () {
+                return $this->container->getFresh('marty\SmartyRenderer');
+            });
     }
 
     private function registerSmartyClass()
