@@ -3,7 +3,13 @@
 namespace marty;
 
 use DirectoryIterator;
+use InvalidArgumentException;
 use mako\syringe\Container;
+use marty\plugins\BasePlugin;
+use marty\plugins\BlockPlugin;
+use marty\plugins\CompilerPlugin;
+use marty\plugins\FunctionPlugin;
+use marty\plugins\ModifierPlugin;
 use Smarty;
 use Smarty_Internal_Template;
 use SplFileInfo;
@@ -48,22 +54,38 @@ class PluginLoader
 
             list($type, $name, $extension) = explode(".", $file->getBasename());
 
-            switch ($type) {
-                case 'modifier':
-                    $this->registerModifier($smarty, $file, $name);
-                    break;
+            $plugin = $this->getPlugin($file, $name, $type);
 
-                case 'function':
-                    $this->registerFunction($smarty, $file, $name);
-                    break;
-
-                case 'block':
-                    $this->registerBlock($smarty, $file, $name);
-
-                case 'compiler':
-                    $this->registerCompiler($smarty, $file, $name);
-            }
+            $plugin->register($smarty);
         }
+    }
+
+    /**
+     * Get the plugin object for a given plugin.
+     *
+     * @param SplFileInfo $file
+     * @param string $name
+     * @param string $type
+     * @return BasePlugin
+     */
+    private function getPlugin(\SplFileInfo $file, $name, $type)
+    {
+        switch ($type) {
+            case 'modifier':
+                return new ModifierPlugin($this->container, $file, $name);
+
+            case 'function':
+                return new FunctionPlugin($this->container, $file, $name);
+
+
+            case 'block':
+                return new BlockPlugin($this->container, $file, $name);
+
+            case 'compiler':
+                return new CompilerPlugin($this->container, $file, $name);
+        }
+
+        throw new InvalidArgumentException("Unable to load plugin of type $type.");
     }
 
     private function isValidPluginFile(SplFileInfo $file)
@@ -86,69 +108,5 @@ class PluginLoader
         }
 
         return false;
-    }
-
-    private function registerModifier(Smarty $smarty, SplFileInfo $file, $name)
-    {
-        $smarty->registerPlugin('modifier', $name,
-            function () use ($name, $file) {
-            require_once $file->getPathname();
-
-            $arguments  = func_get_args();
-            $parameters = ['value' => $arguments[0]];
-
-            for ($i = 1; $i < count($arguments); $i++) {
-                $parameters["param$i"] = $arguments[$i];
-            }
-
-            return $this->container->call("smarty_modifier_$name", $parameters);
-        });
-    }
-
-    private function registerFunction(Smarty $smarty, SplFileInfo $file, $name)
-    {
-        $smarty->registerPlugin('function', $name,
-            function (array $params, Smarty_Internal_Template $template) use ($name, $file) {
-            require_once $file->getPathname();
-
-            $parameters = [
-                'params'   => $params,
-                'template' => $template,
-            ];
-
-            return $this->container->call("smarty_function_$name", $parameters);
-        });
-    }
-
-    private function registerBlock(Smarty $smarty, SplFileInfo $file, $name)
-    {
-        $smarty->registerPlugin('block', $name,
-            function (array $params, $content, Smarty_Internal_Template $template, &$repeat) use ($name, $file) {
-            require_once $file->getPathname();
-
-            $parameters = [
-                'params'   => $params,
-                'template' => $template,
-                'content'  => $content,
-                'repeat'   => $repeat,
-            ];
-
-            return $this->container->call("smarty_block_$name", $parameters);
-        });
-    }
-
-    private function registerCompiler(Smarty $smarty, SplFileInfo $file, $name)
-    {
-        $smarty->registerPlugin('compiler', $name,
-            function (array $params, Smarty $smarty) use ($name, $file) {
-            require_once $file->getPathname();
-
-            $parameters = [
-                'params' => $params,
-                'smarty' => $smarty,
-            ];
-
-            return $this->container->call("smarty_compiler_$name", $parameters);
-        });
     }
 }
