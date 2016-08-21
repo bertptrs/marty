@@ -19,7 +19,7 @@ class CompilerPlugin extends BasePlugin
 
     public function call(array $params, Smarty $smarty)
     {
-        require_once $this->file->getPathname();
+        $this->loadPlugin();
 
         $parameters = [
             'params' => $params,

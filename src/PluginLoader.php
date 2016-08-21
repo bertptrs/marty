@@ -70,19 +70,20 @@ class PluginLoader
      */
     private function getPlugin(\SplFileInfo $file, $name, $type)
     {
+        $container = $this->container;
+        $path = $file->getPathname();
         switch ($type) {
             case 'modifier':
-                return new ModifierPlugin($this->container, $file, $name);
+                return new ModifierPlugin($container, $path, $name);
 
             case 'function':
-                return new FunctionPlugin($this->container, $file, $name);
-
+                return new FunctionPlugin($container, $path, $name);
 
             case 'block':
-                return new BlockPlugin($this->container, $file, $name);
+                return new BlockPlugin($container, $path, $name);
 
             case 'compiler':
-                return new CompilerPlugin($this->container, $file, $name);
+                return new CompilerPlugin($container, $path, $name);
         }
 
         throw new InvalidArgumentException("Unable to load plugin of type $type.");

@@ -19,7 +19,7 @@ class ModifierPlugin extends BasePlugin
 
     public function call()
     {
-        require_once $this->file->getPathname();
+        $this->loadPlugin();
 
         $arguments  = func_get_args();
         $parameters = ['value' => $arguments[0]];

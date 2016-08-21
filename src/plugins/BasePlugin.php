@@ -26,16 +26,16 @@ abstract class BasePlugin
     protected $name;
 
     /**
-     * Reference to the file to include.
+     * Path to the plugin file.
      *
-     * @var SplFileInfo
+     * @var string
      */
-    protected $file;
+    private $path;
 
-    public function __construct(Container $container, SplFileInfo $file, $name)
+    public function __construct(Container $container, $path, $name)
     {
         $this->container = $container;
-        $this->file = $file;
+        $this->path = $path;
         $this->name = $name;
     }
 
@@ -43,4 +43,9 @@ abstract class BasePlugin
      * Register the plugin with the Smarty instance.
      */
     abstract public function register(Smarty $smarty);
+
+    protected function loadPlugin()
+    {
+        require_once $this->path;
+    }
 }

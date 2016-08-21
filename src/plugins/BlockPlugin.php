@@ -21,7 +21,7 @@ class BlockPlugin extends BasePlugin
     public function call(array $params, $content,
                          Smarty_Internal_Template $template, &$repeat)
     {
-        require_once $this->file->getPathname();
+        $this->loadPlugin();
 
         $parameters = [
             'params'   => $params,

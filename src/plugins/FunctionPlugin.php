@@ -15,7 +15,7 @@ class FunctionPlugin extends BasePlugin
 
     public function call(array $params, Smarty_Internal_Template $template)
     {
-        require_once $this->file->getPathname();
+        $this->loadPlugin();
 
         $parameters = [
             'params'   => $params,
