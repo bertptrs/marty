@@ -86,10 +86,11 @@ abstract class BasePlugin
                 $functionParameters[] = $provided[$name];
             }
         } else {
+            $className = $parameter->getClass()->getName();
             try {
-                $functionParameters[] = $this->container->get($parameter->getClass());
+                $functionParameters[] = $this->container->get($className);
             } catch (ReflectionException $ex) {
-                throw new RuntimeException("Unable to resolve parameter $name.",
+                throw new RuntimeException("Unable to resolve parameter $name, typehint $className.",
                 0, $ex);
             }
         }
