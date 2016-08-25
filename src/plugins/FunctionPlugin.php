@@ -12,7 +12,6 @@ use Smarty_Internal_Template;
  */
 class FunctionPlugin extends BasePlugin
 {
-
     public function call(array $params, Smarty_Internal_Template $template)
     {
         $this->loadPlugin();
@@ -22,7 +21,7 @@ class FunctionPlugin extends BasePlugin
             'template' => $template,
         ];
 
-        return $this->container->call("smarty_function_" . $this->name, $parameters);
+        return $this->callWithParameters('smarty_function_' . $this->name, $parameters);
     }
 
     public function register(Smarty $smarty)

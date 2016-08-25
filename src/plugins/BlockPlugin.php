@@ -12,7 +12,6 @@ use Smarty_Internal_Template;
  */
 class BlockPlugin extends BasePlugin
 {
-
     public function register(Smarty $smarty)
     {
         $smarty->registerPlugin('block', $this->name, [$this, 'call']);
@@ -27,9 +26,9 @@ class BlockPlugin extends BasePlugin
             'params'   => $params,
             'template' => $template,
             'content'  => $content,
-            'repeat'   => $repeat,
+            'repeat'   => &$repeat,
         ];
 
-        return $this->container->call("smarty_block_".$this->name, $parameters);
+        return $this->callWithParameters("smarty_block_".$this->name, $parameters);
     }
 }

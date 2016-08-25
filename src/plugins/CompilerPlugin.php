@@ -11,7 +11,6 @@ use Smarty;
  */
 class CompilerPlugin extends BasePlugin
 {
-
     public function register(Smarty $smarty)
     {
         $smarty->registerPlugin('compiler', $this->name, [$this, 'call']);
@@ -26,6 +25,6 @@ class CompilerPlugin extends BasePlugin
             'smarty' => $smarty,
         ];
 
-        return $this->container->call("smarty_compiler_" . $this->name, $parameters);
+        return $this->callWithParameters("smarty_compiler_" . $this->name, $parameters);
     }
 }

@@ -8,7 +8,6 @@ use SmartyException;
 
 class SmartyRenderer implements RendererInterface
 {
-
     private $smarty;
 
     public function __construct(Smarty $smarty)

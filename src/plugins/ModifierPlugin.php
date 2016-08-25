@@ -11,7 +11,6 @@ use Smarty;
  */
 class ModifierPlugin extends BasePlugin
 {
-
     public function register(Smarty $smarty)
     {
         $smarty->registerPlugin('modifier', $this->name, [$this, 'call']);
@@ -28,6 +27,6 @@ class ModifierPlugin extends BasePlugin
             $parameters["param$i"] = $arguments[$i];
         }
 
-        return $this->container->call("smarty_modifier_" . $this->name, $parameters);
+        return $this->callWithParameters("smarty_modifier_" . $this->name, $parameters);
     }
 }

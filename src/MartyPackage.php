@@ -29,7 +29,7 @@ class MartyPackage extends Package
     {
         $this->container->register('Smarty',
             function (Container $container) {
-            return $container->call(function (Config $config, PluginLoader $loader) {
+                return $container->call(function (Config $config, PluginLoader $loader) {
                     $smarty = new Smarty();
                     $smarty->setTemplateDir($config->get("marty::smarty.templateDir"));
 
@@ -41,6 +41,6 @@ class MartyPackage extends Package
 
                     return $smarty;
                 });
-        });
+            });
     }
 }
