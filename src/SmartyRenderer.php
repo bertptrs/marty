@@ -21,14 +21,12 @@ class SmartyRenderer implements RendererInterface
      * @return string The resulting view.
      * @throws SmartyException should anything fail with template parsing.
      */
-    public function render($__view__, array $variables)
+    public function render(string $__view__, array $variables) : string
     {
         $smarty = $this->smarty;
         $smarty->clearAllAssign();
 
-        foreach ($variables as $key => $value) {
-            $smarty->assign($key, $value);
-        }
+        $smarty->assign($variables);
 
         return $smarty->fetch($__view__);
     }

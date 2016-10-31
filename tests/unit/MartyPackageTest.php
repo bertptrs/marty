@@ -26,10 +26,10 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
         // Create a viewfactory that verifies the registerRenderer method is called.
         $viewFactory = $this->getMockBuilder('mako\view\ViewFactory')
             ->disableOriginalConstructor()->getMock();
-        $viewFactory->expects($this->once())->method('registerRenderer')
+        $viewFactory->expects($this->once())->method('extend')
             ->with(
                 $this->equalTo('.tpl'),
-                $this->anything()
+                $this->callback('is_callable')
             );
 
         // Create a container to return our viewFactory.
