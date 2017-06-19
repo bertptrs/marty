@@ -21,12 +21,11 @@ class ModifierPlugin extends BasePlugin
         $this->loadPlugin();
 
         $arguments  = func_get_args();
-        $parameters = ['value' => $arguments[0]];
+        $parameters = [
+            'value' => $arguments[0],
+            'params' => array_slice($arguments, 1)
+        ];
 
-        for ($i = 1; $i < count($arguments); $i++) {
-            $parameters["param$i"] = $arguments[$i];
-        }
-
-        return $this->callWithParameters("smarty_modifier_" . $this->name, $parameters);
+        return $this->callWithParameters('smarty_modifier_' . $this->name, $parameters);
     }
 }

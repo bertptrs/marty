@@ -3,7 +3,7 @@
 namespace marty\tests\unit;
 
 use marty\MartyPackage;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionClass;
 
 /**
@@ -11,7 +11,7 @@ use ReflectionClass;
  *
  * @author Bert Peters <bert.ljpeters@gmail.com>
  */
-class MartyPackageTest extends PHPUnit_Framework_TestCase
+class MartyPackageTest extends TestCase
 {
 
     /**
@@ -35,7 +35,7 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
         // Create a container to return our viewFactory.
         $container = $this->getMockBuilder('mako\syringe\Container')
             ->disableOriginalConstructor()->getMock();
-        $container->expects($this->once())->method("get")->will($this->returnCallback(function ($item) use ($viewFactory) {
+        $container->expects($this->once())->method('get')->will($this->returnCallback(function ($item) use ($viewFactory) {
             switch ($item) {
             case 'config':
                 return null;
@@ -54,7 +54,7 @@ class MartyPackageTest extends PHPUnit_Framework_TestCase
         $package = new MartyPackage($container);
         // Use reflection to call protected method.
         $class  = new ReflectionClass('marty\MartyPackage');
-        $method = $class->getMethod("bootstrap");
+        $method = $class->getMethod('bootstrap');
         $method->setAccessible(true);
         $method->invokeArgs($package, []);
     }

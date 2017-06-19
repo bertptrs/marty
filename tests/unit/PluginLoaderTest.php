@@ -3,14 +3,14 @@
 namespace marty\tests\unit;
 
 use marty\PluginLoader;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test cases for the plugin loader.
  *
  * @author Bert Peters <bert.ljpeters@gmail.com>
  */
-class PluginLoaderTest extends PHPUnit_Framework_TestCase
+class PluginLoaderTest extends TestCase
 {
 
     /**
@@ -20,10 +20,9 @@ class PluginLoaderTest extends PHPUnit_Framework_TestCase
     {
         $container = $this->getMockBuilder('mako\syringe\Container')->disableOriginalConstructor()->getMock();
         $smarty    = $this->getMockBuilder('Smarty')->disableOriginalConstructor()->getMock();
-        $smarty->expects($this->once())
+        $smarty->expects($this->exactly(2))
             ->method('registerPlugin')
-            ->with($this->equalTo('function'), $this->equalTo('plugintest'),
-                $this->callback('is_callable')
+            ->with($this->anything(), $this->anything(), $this->callback('is_callable')
         );
 
         $instance = new PluginLoader($container);

@@ -2,36 +2,43 @@
 
 namespace marty\tests\unit;
 
+use mako\syringe\Container;
+use marty\PluginLoader;
 use marty\SmartyRenderer;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Smarty;
 
-class SmartyRendererTest extends PHPUnit_Framework_TestCase
+class SmartyRendererTest extends TestCase
 {
-    private static $smarty;
+    /**
+     * @var Smarty
+     */
+    private $smarty;
 
-    public static function setUpBeforeClass()
+    public function setUp()
     {
-        parent::setUpBeforeClass();
+        parent::setUp();
         $smarty = new Smarty();
-        $smarty->setTemplateDir(dirname(__DIR__)."/resources/views/");
-        $smarty->setCompileDir(sys_get_temp_dir().uniqid("/martycompiletest_"));
+        $smarty->setTemplateDir(dirname(__DIR__).'/resources/views/');
+        $smarty->setCompileDir(sys_get_temp_dir().uniqid('/martycompiletest_'));
 
-        // Don't use the plugin loader for these tests.
-        $smarty->setPluginsDir(dirname(__DIR__)."/resources/plugins");
+        $container = $this->createMock(Container::class);
 
-        static::$smarty = $smarty;
+        $pluginLoader = new PluginLoader($container);
+        $pluginLoader->loadPlugins([dirname(__DIR__).'/resources/plugins'], $smarty);
+
+        $this->smarty = $smarty;
     }
 
     public function renderProvider()
     {
         $files   = [];
-        $basedir = dirname(__DIR__)."/resources/views/";
+        $basedir = dirname(__DIR__).'/resources/views/';
         $it      = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basedir));
         foreach ($it as $template) {
-            if (substr($template->getRealPath(), -4) != ".tpl") {
+            if (substr($template->getRealPath(), -4) != '.tpl') {
                 // Not a template.
                 continue;
             }
@@ -43,6 +50,16 @@ class SmartyRendererTest extends PHPUnit_Framework_TestCase
         return $files;
     }
 
+    public function tearDown()
+    {
+        parent::tearDown();
+
+        // Delete smarty compilation dir
+        $dir = escapeshellarg($this->smarty->getCompileDir());
+
+        `rm -r $dir`;
+    }
+
     /**
      * Test the rendering capabilities of the engine.
      *
@@ -51,10 +68,10 @@ class SmartyRendererTest extends PHPUnit_Framework_TestCase
      */
     public function testRender($templateFile)
     {
-        $instance  = new SmartyRenderer(static::$smarty);
+        $instance  = new SmartyRenderer($this->smarty);
         $variables = $this->getTemplateVariables($templateFile);
 
-        $result   = $instance->render($templateFile . ".tpl", $variables);
+        $result   = $instance->render($templateFile . '.tpl', $variables);
         $expected = $this->getCorrectRender($templateFile);
 
         $this->assertEquals($expected, $result);

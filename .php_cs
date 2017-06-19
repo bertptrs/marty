@@ -1,12 +1,12 @@
 <?php
 
-$finder = Symfony\CS\Finder\DefaultFinder::create()
+$finder = PhpCsFixer\Finder::create()
     ->exclude('vendor')
-    ->in(__DIR__)
-;
+    ->in(__DIR__);
 
-return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::PSR2_LEVEL)
-    ->finder($finder)
+return PhpCsFixer\Config::create()
     ->setUsingCache(true)
-;
+    ->setRules([
+        '@PSR2'              => true,
+        'single_quote'       => true,
+    ])->setFinder($finder);

@@ -78,8 +78,7 @@ This means that the parameters should be named as follows:
     - The smarty template should be named `$template`
 - Modifiers:
     - The input data should be named `$value`
-    - Any other parameters should be named `$param1`, `$param2` et
-      cetera.
+    - Any other values will be stored in array `$params` in order.
 - Block functions:
     - Call parameters should be named `$params`
     - The block content should be named `$content`

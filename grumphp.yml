@@ -3,7 +3,7 @@ parameters:
     bin_dir: vendor/bin
     tasks:
         phpcsfixer:
-            config_file: .php_cs
+            config: .php_cs
         phpunit: ~
         git_blacklist:
             keywords:
