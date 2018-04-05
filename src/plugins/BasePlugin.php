@@ -3,6 +3,7 @@
 namespace marty\plugins;
 
 use mako\syringe\Container;
+use marty\UnresolvableParameterException;
 use ReflectionException;
 use ReflectionFunction;
 use ReflectionParameter;
@@ -62,22 +63,35 @@ abstract class BasePlugin
      */
     protected function callWithParameters($functionName, array $params)
     {
-        $function = new ReflectionFunction($functionName);
+        try {
+            $function = new ReflectionFunction($functionName);
 
-        $functionParameters = [];
+            $functionParameters = [];
 
-        foreach ($function->getParameters() as $parameter) {
-            $name = $this->resolveParameter($parameter, $params,
-                $functionParameters);
+            foreach ($function->getParameters() as $parameter) {
+                $this->resolveParameter(
+                    $parameter,
+                    $params,
+                    $functionParameters
+                );
+            }
+
+            return $function->invokeArgs($functionParameters);
+        } catch (UnresolvableParameterException $ex) {
+            $error = sprintf(
+                'Unable to resolve parameter "%s" for plugin "%s". Broken plugin?',
+                $ex->getMessage(),
+                $functionName
+            );
+            throw new \InvalidArgumentException($error);
         }
-
-        return $function->invokeArgs($functionParameters);
     }
 
-    private function resolveParameter(ReflectionParameter $parameter,
+    private function resolveParameter(
+        ReflectionParameter $parameter,
                                       array $provided,
-                                      array &$functionParameters)
-    {
+                                      array &$functionParameters
+    ) {
         $name = $parameter->getName();
         if (array_key_exists($name, $provided)) {
             if ($parameter->isPassedByReference()) {
@@ -86,12 +100,19 @@ abstract class BasePlugin
                 $functionParameters[] = $provided[$name];
             }
         } else {
+            $class = $parameter->getClass();
+            if ($class == null) {
+                throw new UnresolvableParameterException($name);
+            }
             $className = $parameter->getClass()->getName();
             try {
                 $functionParameters[] = $this->container->get($className);
             } catch (ReflectionException $ex) {
-                throw new RuntimeException("Unable to resolve parameter $name, typehint $className.",
-                0, $ex);
+                throw new RuntimeException(
+                    "Unable to resolve parameter $name, typehint $className.",
+                0,
+                    $ex
+                );
             }
         }
     }
