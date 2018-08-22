@@ -7,5 +7,5 @@
  */
 function smarty_function_plugintest()
 {
-    return "Plugin works";
+    return 'Plugin works';
 }

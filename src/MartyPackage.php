@@ -9,7 +9,7 @@ use Smarty;
 
 class MartyPackage extends Package
 {
-    protected $packageName = "marty";
+    protected $packageName = 'marty';
 
     protected function bootstrap()
     {
@@ -27,13 +27,14 @@ class MartyPackage extends Package
 
     private function registerSmartyClass()
     {
-        $this->container->register('Smarty',
+        $this->container->register(
+            'Smarty',
             function (Container $container) {
                 return $container->call(function (Config $config, PluginLoader $loader) {
                     $smarty = new Smarty();
-                    $smarty->setTemplateDir($config->get("marty::smarty.templateDir"));
+                    $smarty->setTemplateDir($config->get('marty::smarty.templateDir'));
 
-                    $smarty->setCompileDir($config->get("marty::smarty.compileDir"));
+                    $smarty->setCompileDir($config->get('marty::smarty.compileDir'));
 
                     $smarty->setCaching(Smarty::CACHING_OFF);
 
@@ -41,6 +42,7 @@ class MartyPackage extends Package
 
                     return $smarty;
                 });
-            });
+            }
+        );
     }
 }

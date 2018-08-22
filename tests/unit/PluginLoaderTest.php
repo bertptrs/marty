@@ -22,7 +22,10 @@ class PluginLoaderTest extends TestCase
         $smarty    = $this->getMockBuilder('Smarty')->disableOriginalConstructor()->getMock();
         $smarty->expects($this->exactly(2))
             ->method('registerPlugin')
-            ->with($this->anything(), $this->anything(), $this->callback('is_callable')
+            ->with(
+                $this->anything(),
+                $this->anything(),
+                $this->callback('is_callable')
         );
 
         $instance = new PluginLoader($container);

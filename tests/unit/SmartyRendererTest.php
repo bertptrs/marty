@@ -43,8 +43,10 @@ class SmartyRendererTest extends TestCase
                 continue;
             }
 
-            $files[] = [substr(substr($template->getRealPath(),
-                        mb_strlen($basedir)), 0, -4)];
+            $files[] = [substr(substr(
+                $template->getRealPath(),
+                        mb_strlen($basedir)
+            ), 0, -4)];
         }
 
         return $files;

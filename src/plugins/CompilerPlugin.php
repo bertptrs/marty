@@ -25,6 +25,6 @@ class CompilerPlugin extends BasePlugin
             'smarty' => $smarty,
         ];
 
-        return $this->callWithParameters("smarty_compiler_" . $this->name, $parameters);
+        return $this->callWithParameters('smarty_compiler_' . $this->name, $parameters);
     }
 }

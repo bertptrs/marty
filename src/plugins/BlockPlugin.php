@@ -17,9 +17,12 @@ class BlockPlugin extends BasePlugin
         $smarty->registerPlugin('block', $this->name, [$this, 'call']);
     }
 
-    public function call(array $params, $content,
-                         Smarty_Internal_Template $template, &$repeat)
-    {
+    public function call(
+        array $params,
+        $content,
+                         Smarty_Internal_Template $template,
+        &$repeat
+    ) {
         $this->loadPlugin();
 
         $parameters = [
@@ -29,6 +32,6 @@ class BlockPlugin extends BasePlugin
             'repeat'   => &$repeat,
         ];
 
-        return $this->callWithParameters("smarty_block_".$this->name, $parameters);
+        return $this->callWithParameters('smarty_block_'.$this->name, $parameters);
     }
 }

@@ -52,7 +52,7 @@ class PluginLoader
                 continue;
             }
 
-            list($type, $name, $extension) = explode(".", $file->getBasename());
+            list($type, $name, $extension) = explode('.', $file->getBasename());
 
             $plugin = $this->getPlugin($file, $name, $type);
 
@@ -95,7 +95,7 @@ class PluginLoader
             return false;
         }
 
-        $parts = explode(".", $file->getBasename());
+        $parts = explode('.', $file->getBasename());
         if (count($parts) != 3 || $parts[2] != 'php') {
             return false;
         }
