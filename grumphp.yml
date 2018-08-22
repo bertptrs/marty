@@ -2,6 +2,8 @@ parameters:
     git_dir: .
     bin_dir: vendor/bin
     tasks:
+        composer:
+            strict: true
         phpcsfixer:
             config: .php_cs
         phpunit: ~

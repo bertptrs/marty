@@ -16,8 +16,8 @@
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "*",
-		"phpunit/phpunit": "^6.2",
-		"phpro/grumphp": "^0.11.0"
+		"phpunit/phpunit": "^7.0",
+		"phpro/grumphp": "^0.14.0"
 
 	},
 	"autoload": {
