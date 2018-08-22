@@ -3,11 +3,8 @@ php:
     - '7.0'
     - '7.1'
     - '7.2'
-    - nightly
 
 matrix:
-    allow-failures:
-        - php: nightly
     fast-finish: true
 
 install: composer install
