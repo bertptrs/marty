@@ -22,7 +22,11 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"marty\\": "src",
+			"marty\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
 			"marty\\tests\\": "tests"
 		}
 	}
