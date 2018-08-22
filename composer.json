@@ -7,7 +7,7 @@
 	"authors": [
 		{
 			"name": "Bert Peters",
-			"email": "bert@solution-web.nl"
+			"email": "bert@bertptrs.nl"
 		}
 	],
 	"require": {
@@ -16,7 +16,7 @@
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "*",
-		"phpunit/phpunit": "^7.0",
+		"phpunit/phpunit": "^6.5.12",
 		"phpro/grumphp": "^0.14.0"
 
 	},
