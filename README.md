@@ -6,9 +6,10 @@ Marty is a simple Smarty view renderer for the Mako framework.
 
 ## Requirements
 
-Marty has been tested on mako 4.5. Any other version _may_ work, but has not
-been tested. Unit tests are run against PHP 5.5.9 and up. Smarty 3 is
-required, but will be pulled in as part of the installation.
+Marty has been tested on all current Mako versions. Any other version
+_may_ work, but has not been tested. Unit tests are run against PHP 7.0
+and up. Smarty 3 is required, but will be pulled in as part of the
+installation.
 
 ## Installation
 
@@ -28,8 +29,8 @@ requirements
 
 ## Usage
 
-Once installed, you will need to add it to your packages list. You do this by
-adding it to the "Web" packages. This is located in the file
+Once installed, you will need to add it to your packages list. You do
+this by adding it to the "Web" packages. This is located in the file
 `app/config/application.php`.
 
 ```php
@@ -52,7 +53,10 @@ This enables the Smarty View renderer for every view with the ".tpl" file extens
 
 ### Configuration
 
-Configuration can be done by changing the `marty::smarty` configuration. Just refer to the [Mako documentation on package configuration](http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration) for details.
+Configuration can be done by changing the `marty::smarty` configuration.
+Just refer to the [Mako documentation on package
+configuration](http://makoframework.com/docs/3.6/getting-started:configuration#cascading_configuration)
+for details.
 
 The configuration properties are as follows:
 
@@ -104,11 +108,11 @@ Then, we can use your plugin like this:
 Lets show {'some.translated.text'|i18n}.
 ```
 
-## To do
+## Contributing
 
-If I find the time, I would like to add support for:
+If there are any features in Smarty that cannot (easily) be used in the
+current package, or if there are Mako features that are hard to bind to
+Smarty, feel free to file an issue or a pull request.
 
-* Smarty config files.
-* Smarty caching.
-* Smarty dynamic cache control.
-* Anything else I fail to think of.
+Code style and such are ran using GrumPHP. Make sure that your files are
+in accordance to those rules.
