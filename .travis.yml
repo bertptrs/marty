@@ -7,7 +7,7 @@ php:
 
 matrix:
     allow-failures:
-        php: nightly
+        - php: nightly
     fast-finish: true
 
 install: composer install
