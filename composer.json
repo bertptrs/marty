@@ -15,7 +15,7 @@
 		"mako/framework": "^5.0"
 	},
 	"require-dev": {
-		"friendsofphp/php-cs-fixer": "*",
+		"friendsofphp/php-cs-fixer": "^2.12",
 		"phpunit/phpunit": "^6.5.12",
 		"phpro/grumphp": "^0.14.0"
 
