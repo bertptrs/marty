@@ -11,13 +11,15 @@
 		}
 	],
 	"require": {
-		"smarty/smarty": "~3",
+		"php": "^7",
+		"smarty/smarty": "^3",
 		"mako/framework": "^5.0"
 	},
 	"require-dev": {
 		"friendsofphp/php-cs-fixer": "^2.12",
 		"phpunit/phpunit": "^6.5.12",
-		"phpro/grumphp": "^0.14.0"
+		"phpro/grumphp": "^0.14.0",
+		"jakub-onderka/php-parallel-lint": "^1.0"
 
 	},
 	"autoload": {
