@@ -17,7 +17,7 @@ class FunctionPlugin extends BasePlugin
         $this->loadPlugin();
 
         $parameters = [
-            'params'   => $params,
+            'params' => $params,
             'template' => $template,
         ];
 

@@ -16,14 +16,13 @@ class ModifierPlugin extends BasePlugin
         $smarty->registerPlugin('modifier', $this->name, [$this, 'call']);
     }
 
-    public function call()
+    public function call($value, ...$params)
     {
         $this->loadPlugin();
 
-        $arguments  = func_get_args();
         $parameters = [
-            'value' => $arguments[0],
-            'params' => array_slice($arguments, 1)
+            'value' => $value,
+            'params' => $params,
         ];
 
         return $this->callWithParameters('smarty_modifier_' . $this->name, $parameters);

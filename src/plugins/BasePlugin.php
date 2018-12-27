@@ -39,8 +39,8 @@ abstract class BasePlugin
     public function __construct(Container $container, $path, $name)
     {
         $this->container = $container;
-        $this->path      = $path;
-        $this->name      = $name;
+        $this->path = $path;
+        $this->name = $name;
     }
 
     /**
@@ -89,8 +89,8 @@ abstract class BasePlugin
 
     private function resolveParameter(
         ReflectionParameter $parameter,
-                                      array $provided,
-                                      array &$functionParameters
+        array $provided,
+        array &$functionParameters
     ) {
         $name = $parameter->getName();
         if (array_key_exists($name, $provided)) {
@@ -110,7 +110,7 @@ abstract class BasePlugin
             } catch (ReflectionException $ex) {
                 throw new RuntimeException(
                     "Unable to resolve parameter $name, typehint $className.",
-                0,
+                    0,
                     $ex
                 );
             }

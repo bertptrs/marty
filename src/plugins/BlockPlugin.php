@@ -20,18 +20,18 @@ class BlockPlugin extends BasePlugin
     public function call(
         array $params,
         $content,
-                         Smarty_Internal_Template $template,
-        &$repeat
+        Smarty_Internal_Template $template,
+        bool &$repeat
     ) {
         $this->loadPlugin();
 
         $parameters = [
-            'params'   => $params,
+            'params' => $params,
             'template' => $template,
-            'content'  => $content,
-            'repeat'   => &$repeat,
+            'content' => $content,
+            'repeat' => &$repeat,
         ];
 
-        return $this->callWithParameters('smarty_block_'.$this->name, $parameters);
+        return $this->callWithParameters('smarty_block_' . $this->name, $parameters);
     }
 }
