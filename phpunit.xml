@@ -5,7 +5,6 @@
 	bootstrap="tests/bootstrap.php"
 	colors="true"
 	backupGlobals="false"
-	backupStaticAttributes="false"
 	verbose="true"
 >
 	<testsuites>
@@ -13,4 +12,9 @@
 			<directory>tests/unit</directory>
 		</testsuite>
 	</testsuites>
+	<filter>
+		<whitelist>
+			<directory>src</directory>
+		</whitelist>
+	</filter>
 </phpunit>

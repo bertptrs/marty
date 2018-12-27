@@ -31,5 +31,8 @@
 		"psr-4": {
 			"marty\\tests\\": "tests"
 		}
+	},
+	"suggest": {
+		"phpunit/phpunit": "Test whether templates actually compile in your unit tests."
 	}
 }
