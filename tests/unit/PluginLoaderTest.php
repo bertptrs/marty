@@ -20,7 +20,7 @@ class PluginLoaderTest extends TestCase
     {
         $container = $this->getMockBuilder('mako\syringe\Container')->disableOriginalConstructor()->getMock();
         $smarty    = $this->getMockBuilder('Smarty')->disableOriginalConstructor()->getMock();
-        $smarty->expects($this->exactly(2))
+        $smarty->expects($this->exactly(3))
             ->method('registerPlugin')
             ->with(
                 $this->anything(),
