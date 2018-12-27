@@ -38,15 +38,14 @@ class SmartyRendererTest extends TestCase
         $basedir = dirname(__DIR__).'/resources/views/';
         $it      = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($basedir));
         foreach ($it as $template) {
-            if (substr($template->getRealPath(), -4) != '.tpl') {
+            if (mb_substr($template->getRealPath(), -4) != '.tpl') {
                 // Not a template.
                 continue;
             }
 
-            $files[] = [substr(substr(
-                $template->getRealPath(),
-                        mb_strlen($basedir)
-            ), 0, -4)];
+            $file = mb_substr($template->getRealPath(), mb_strlen($basedir), -4);
+
+            $files[$file] = [$file];
         }
 
         return $files;
