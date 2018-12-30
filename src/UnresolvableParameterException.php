@@ -11,16 +11,21 @@ class UnresolvableParameterException extends \InvalidArgumentException
 {
     public function __construct(\ReflectionParameter $parameter, \Throwable $previous = null)
     {
-        $message = 'Unable to resolve parameter ';
-        if ($parameter->isPassedByReference()) {
-            $message .= '&';
-        }
-        $message .= '$' . $parameter->getName();
-
-        if ($parameter->getClass() != null) {
-            $message .= sprintf(' (%s)', $parameter->getClass()->getName());
-        }
-
+        $message = sprintf(
+            'Unable to resolve parameter %s$%s (%s)',
+            $parameter->isPassedByReference() ? '&' : '',
+            $parameter->getName(),
+            $this->formatClassInfo($parameter)
+        );
         parent::__construct($message, 0, $previous);
+    }
+
+    private function formatClassInfo(\ReflectionParameter $parameter): string
+    {
+        if ($parameter->getType() == null) {
+            return 'no type information';
+        } else {
+            return $parameter->getType()->getName();
+        }
     }
 }

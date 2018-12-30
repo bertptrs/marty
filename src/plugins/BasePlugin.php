@@ -59,27 +59,19 @@ abstract class BasePlugin
      * @param string $functionName
      * @param array $params
      * @return mixed Whatever the function returns.
-     * @throws
+     * @throws \ReflectionException
+     * @throws UnresolvableParameterException
      */
     protected function callWithParameters($functionName, array $params)
     {
-        try {
-            $function = new ReflectionFunction($functionName);
+        $function = new ReflectionFunction($functionName);
 
-            $functionParameters = [];
+        $functionParameters = [];
 
-            foreach ($function->getParameters() as $parameter) {
-                $functionParameters[] = &$this->resolver->resolveParameter($parameter, $params);
-            }
-
-            return $function->invokeArgs($functionParameters);
-        } catch (UnresolvableParameterException $ex) {
-            $error = sprintf(
-                'Unable to resolve parameter "%s" for plugin "%s". Broken plugin?',
-                $ex->getMessage(),
-                $functionName
-            );
-            throw new \InvalidArgumentException($error);
+        foreach ($function->getParameters() as $parameter) {
+            $functionParameters[] = &$this->resolver->resolveParameter($parameter, $params);
         }
+
+        return $function->invokeArgs($functionParameters);
     }
 }

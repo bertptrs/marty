@@ -35,18 +35,19 @@ class ParameterResolver
         if (array_key_exists($name, $provided)) {
             return $provided[$name];
         } else {
-            return $this->resolveDIParameter($parameter);
+            $parameter = $this->resolveDIParameter($parameter);
+            return $parameter;
         }
     }
 
     private function resolveDIParameter(ReflectionParameter $parameter)
     {
-        $class = $parameter->getClass();
-        if ($class == null) {
-            throw new UnresolvableParameterException($parameter);
-        }
-
         try {
+            $class = $parameter->getClass();
+            if ($class == null) {
+                throw new UnresolvableParameterException($parameter);
+            }
+
             return $this->container->get($class->getName());
         } catch (\Throwable $ex) {
             throw new UnresolvableParameterException($parameter, $ex);
