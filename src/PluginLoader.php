@@ -27,15 +27,13 @@ use SplFileInfo;
 class PluginLoader
 {
     /**
-     * Container reference to call plugins with.
-     *
-     * @var Container
+     * @var ParameterResolver
      */
-    private $container;
+    private $resolver;
 
-    public function __construct(Container $container)
+    public function __construct(ParameterResolver $resolver)
     {
-        $this->container = $container;
+        $this->resolver = $resolver;
     }
 
     public function loadPlugins(array $pluginDirs, Smarty $smarty)
@@ -70,20 +68,20 @@ class PluginLoader
      */
     private function getPlugin(\SplFileInfo $file, $name, $type)
     {
-        $container = $this->container;
+        $resolver = $this->resolver;
         $path = $file->getPathname();
         switch ($type) {
             case 'modifier':
-                return new ModifierPlugin($container, $path, $name);
+                return new ModifierPlugin($resolver, $path, $name);
 
             case 'function':
-                return new FunctionPlugin($container, $path, $name);
+                return new FunctionPlugin($resolver, $path, $name);
 
             case 'block':
-                return new BlockPlugin($container, $path, $name);
+                return new BlockPlugin($resolver, $path, $name);
 
             case 'compiler':
-                return new CompilerPlugin($container, $path, $name);
+                return new CompilerPlugin($resolver, $path, $name);
         }
 
         throw new InvalidArgumentException("Unable to load plugin of type $type.");

@@ -2,6 +2,7 @@
 
 namespace marty\tests\unit;
 
+use marty\ParameterResolver;
 use marty\PluginLoader;
 use PHPUnit\Framework\TestCase;
 
@@ -20,7 +21,7 @@ class PluginLoaderTest extends TestCase
     {
         $container = $this->getMockBuilder('mako\syringe\Container')->disableOriginalConstructor()->getMock();
         $smarty    = $this->getMockBuilder('Smarty')->disableOriginalConstructor()->getMock();
-        $smarty->expects($this->exactly(3))
+        $smarty->expects($this->exactly(4))
             ->method('registerPlugin')
             ->with(
                 $this->anything(),
@@ -28,7 +29,7 @@ class PluginLoaderTest extends TestCase
                 $this->callback('is_callable')
         );
 
-        $instance = new PluginLoader($container);
+        $instance = new PluginLoader(new ParameterResolver($container));
         $dirs     = [dirname(__DIR__).'/resources/plugins'];
         $instance->loadPlugins($dirs, $smarty);
     }

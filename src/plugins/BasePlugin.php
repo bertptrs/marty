@@ -2,12 +2,9 @@
 
 namespace marty\plugins;
 
-use mako\syringe\Container;
+use marty\ParameterResolver;
 use marty\UnresolvableParameterException;
-use ReflectionException;
 use ReflectionFunction;
-use ReflectionParameter;
-use RuntimeException;
 use Smarty;
 
 /**
@@ -18,9 +15,9 @@ use Smarty;
 abstract class BasePlugin
 {
     /**
-     * @var Container
+     * @var ParameterResolver
      */
-    protected $container;
+    protected $resolver;
 
     /**
      * Name of the plugin
@@ -36,15 +33,17 @@ abstract class BasePlugin
      */
     private $path;
 
-    public function __construct(Container $container, $path, $name)
+    public function __construct(ParameterResolver $resolver, $path, $name)
     {
-        $this->container = $container;
+        $this->resolver = $resolver;
         $this->path = $path;
         $this->name = $name;
     }
 
     /**
      * Register the plugin with the Smarty instance.
+     *
+     * @param $smarty Smarty the instance to register to
      */
     abstract public function register(Smarty $smarty);
 
@@ -60,6 +59,7 @@ abstract class BasePlugin
      * @param string $functionName
      * @param array $params
      * @return mixed Whatever the function returns.
+     * @throws
      */
     protected function callWithParameters($functionName, array $params)
     {
@@ -69,11 +69,7 @@ abstract class BasePlugin
             $functionParameters = [];
 
             foreach ($function->getParameters() as $parameter) {
-                $this->resolveParameter(
-                    $parameter,
-                    $params,
-                    $functionParameters
-                );
+                $functionParameters[] = &$this->resolver->resolveParameter($parameter, $params);
             }
 
             return $function->invokeArgs($functionParameters);
@@ -84,36 +80,6 @@ abstract class BasePlugin
                 $functionName
             );
             throw new \InvalidArgumentException($error);
-        }
-    }
-
-    private function resolveParameter(
-        ReflectionParameter $parameter,
-        array $provided,
-        array &$functionParameters
-    ) {
-        $name = $parameter->getName();
-        if (array_key_exists($name, $provided)) {
-            if ($parameter->isPassedByReference()) {
-                $functionParameters[] = &$provided[$name];
-            } else {
-                $functionParameters[] = $provided[$name];
-            }
-        } else {
-            $class = $parameter->getClass();
-            if ($class == null) {
-                throw new UnresolvableParameterException($name);
-            }
-            $className = $parameter->getClass()->getName();
-            try {
-                $functionParameters[] = $this->container->get($className);
-            } catch (ReflectionException $ex) {
-                throw new RuntimeException(
-                    "Unable to resolve parameter $name, typehint $className.",
-                    0,
-                    $ex
-                );
-            }
         }
     }
 }

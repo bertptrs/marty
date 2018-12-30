@@ -3,6 +3,7 @@
 namespace marty\tests\unit;
 
 use mako\syringe\Container;
+use marty\ParameterResolver;
 use marty\PluginLoader;
 use marty\SmartyRenderer;
 use PHPUnit\Framework\TestCase;
@@ -26,7 +27,7 @@ class SmartyRendererTest extends TestCase
 
         $container = $this->createMock(Container::class);
 
-        $pluginLoader = new PluginLoader($container);
+        $pluginLoader = new PluginLoader(new ParameterResolver($container));
         $pluginLoader->loadPlugins([dirname(__DIR__).'/resources/plugins'], $smarty);
 
         $this->smarty = $smarty;
