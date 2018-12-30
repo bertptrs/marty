@@ -22,10 +22,6 @@ class UnresolvableParameterException extends \InvalidArgumentException
 
     private function formatClassInfo(\ReflectionParameter $parameter): string
     {
-        if ($parameter->getType() == null) {
-            return 'no type information';
-        } else {
-            return $parameter->getType()->getName();
-        }
+        return $parameter->getType();
     }
 }
