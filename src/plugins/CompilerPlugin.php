@@ -2,6 +2,7 @@
 
 namespace marty\plugins;
 
+use marty\UnresolvableParameterException;
 use Smarty;
 
 /**
@@ -16,7 +17,16 @@ class CompilerPlugin extends BasePlugin
         $smarty->registerPlugin('compiler', $this->name, [$this, 'call']);
     }
 
-    public function call(array $params, Smarty $smarty)
+    /**
+     * Call a template plugin.
+     *
+     * @param array $params The parameters assigned to the view.
+     * @param Smarty $smarty Note: not actually a smarty object, but something internal.
+     * @return mixed whatever the plugin does
+     * @throws UnresolvableParameterException
+     * @throws \ReflectionException
+     */
+    public function call(array $params, $smarty)
     {
         $this->loadPlugin();
 
