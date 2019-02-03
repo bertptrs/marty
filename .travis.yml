@@ -4,27 +4,14 @@ cache:
     directories:
         - ~/.cache/composer
 
-env:
-    global:
-        # Needed because of PHP 7.3
-        - PHP_CS_FIXER_IGNORE_ENV=1
+php:
+    - 7.0
+    - 7.1
+    - 7.2
+    - 7.3
 
 matrix:
     fast_finish: true
-    include:
-        - php: 7.0
-        - php: 7.1
-        - php: 7.2
-        - php: 7.3
-          env: COMPOSERFLAGS=""
-        - php: 7.3
-          env: COMPOSERFLAGS="--ignore-platform-reqs"
-        - php: nightly
-
-    allow_failures:
-        - php: nightly
-        - php: 7.3
-          env: COMPOSERFLAGS=""
 
 install:
     - composer install $COMPOSERFLAGS
