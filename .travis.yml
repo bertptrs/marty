@@ -12,7 +12,7 @@ matrix:
     fast_finish: true
 
 install:
-    - composer install $COMPOSERFLAGS
+    - composer install
 
 script:
     - vendor/bin/grumphp run
