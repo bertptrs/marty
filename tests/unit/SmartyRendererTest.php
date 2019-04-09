@@ -18,7 +18,7 @@ class SmartyRendererTest extends TestCase
      */
     private $smarty;
 
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $smarty = new Smarty();
@@ -52,7 +52,7 @@ class SmartyRendererTest extends TestCase
         return $files;
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         parent::tearDown();
 

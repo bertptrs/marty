@@ -3,6 +3,7 @@
 namespace marty\util;
 
 use PHPUnit\Framework\TestCase;
+use Smarty;
 
 /**
  * Class TemplateCompilationTest
@@ -21,7 +22,7 @@ abstract class TemplateCompilationTest extends TestCase
     private static $compileDir;
 
     /**
-     * @var \Smarty smarty instance.
+     * @var Smarty smarty instance.
      */
     private $smarty;
 
@@ -30,7 +31,7 @@ abstract class TemplateCompilationTest extends TestCase
      *
      * @see TestCase::setUpBeforeClass()
      */
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -47,7 +48,7 @@ abstract class TemplateCompilationTest extends TestCase
      *
      * @see TestCase::tearDownAfterClass()
      */
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 
@@ -62,11 +63,11 @@ abstract class TemplateCompilationTest extends TestCase
      *
      * @see TestCase::setUp()
      */
-    public function setUp()
+    public function setUp(): void
     {
         parent::setUp();
         $config = $this->getMartyConfig();
-        $smarty = new \Smarty();
+        $smarty = new Smarty();
         $smarty->setTemplateDir($config['templateDir']);
         $smarty->setCompileDir(self::$compileDir);
         foreach ($config['pluginDirs'] as $pluginDir) {
