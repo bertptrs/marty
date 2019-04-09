@@ -1,4 +1,4 @@
-# 6.x
+# 6.0
 
 - Require Mako 6.0 or compatible
 - Require PHP 7.2
