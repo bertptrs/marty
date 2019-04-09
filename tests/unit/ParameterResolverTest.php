@@ -48,21 +48,25 @@ class ParameterResolverTest extends TestCase
      */
     public function testResolutionCanFail()
     {
-        $container = new Container();
-
-        $instance = new ParameterResolver($container);
         $function = new ReflectionFunction('marty\tests\unit\dummy_unresolvable');
-
-        $parameters = $function->getParameters();
-        $this->expectException(UnresolvableParameterException::class);
-        $instance->resolveParameter($parameters[0], []);
+        $this->checkParameterResolutionFailure($function);
     }
 
+    /**
+     * Test that resolution failure also works for parameters without class.
+     *
+     * @throws ReflectionException
+     */
     public function testResolutionCanFailWithoutClass()
+    {
+        $function = new ReflectionFunction('marty\tests\unit\dummy_unresolvable2');
+        $this->checkParameterResolutionFailure($function);
+    }
+
+    private function checkParameterResolutionFailure(ReflectionFunction $function)
     {
         $container = new Container();
         $instance = new ParameterResolver($container);
-        $function = new ReflectionFunction('marty\tests\unit\dummy_unresolvable2');
 
         $parameters = $function->getParameters();
         $this->expectException(UnresolvableParameterException::class);
