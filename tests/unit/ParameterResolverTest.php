@@ -38,7 +38,6 @@ class ParameterResolverTest extends TestCase
      * Test that resolution failure throws the right exception.
      *
      * @throws \ReflectionException
-     * @expectedException \marty\UnresolvableParameterException
      */
     public function testResolutionCanFail()
     {
@@ -48,6 +47,7 @@ class ParameterResolverTest extends TestCase
         $function = new \ReflectionFunction('marty\tests\unit\dummy_unresolvable');
 
         $parameters = $function->getParameters();
+        $this->expectException(UnresolvableParameterException::class);
         $instance->resolveParameter($parameters[0], []);
     }
 }
