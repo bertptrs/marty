@@ -4,7 +4,7 @@ parameters:
     tasks:
         composer:
             strict: true
-        phpcsfixer:
+        phpcsfixer2:
             config: .php_cs
         phpunit: ~
         phplint: ~
