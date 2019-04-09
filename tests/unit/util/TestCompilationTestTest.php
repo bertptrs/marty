@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: bert
- * Date: 27/12/18
- * Time: 14:36
- */
 
 namespace marty\tests\unit\util;
 
@@ -24,7 +18,7 @@ class TestCompilationTestTest extends TestCase
 
         foreach ($instance->viewProvider() as $view) {
             $instance->setUp();
-            $this->assertInternalType('array', $view);
+            $this->assertIsArray($view);
             call_user_func_array([$instance, 'testTemplateCompiles'], $view);
             $instance->tearDown();
         }
@@ -44,7 +38,7 @@ class TestCompilationTestTest extends TestCase
         $base = dirname(__DIR__, 2);
         return [
             'templateDir' => $base . '/resources/views',
-            'pluginDirs' => [$base . '/resources/views'],
+            'pluginDirs'  => [$base . '/resources/views'],
         ];
     }
 }

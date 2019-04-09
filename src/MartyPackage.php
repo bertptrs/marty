@@ -11,7 +11,7 @@ class MartyPackage extends Package
 {
     protected $packageName = 'marty';
 
-    protected function bootstrap()
+    protected function bootstrap(): void
     {
         $this->registerSmartyClass();
         $this->registerViewRenderer();
