@@ -2,6 +2,8 @@
 
 namespace marty;
 
+use ReflectionParameter;
+
 /**
  * Thrown when parameter resolution fails and a parameter cannot be resolved.
  *
@@ -9,7 +11,7 @@ namespace marty;
  */
 class UnresolvableParameterException extends \InvalidArgumentException
 {
-    public function __construct(\ReflectionParameter $parameter, \Throwable $previous = null)
+    public function __construct(ReflectionParameter $parameter, \Throwable $previous = null)
     {
         $message = sprintf(
             'Unable to resolve parameter %s$%s (%s)',
@@ -20,8 +22,8 @@ class UnresolvableParameterException extends \InvalidArgumentException
         parent::__construct($message, 0, $previous);
     }
 
-    private function formatClassInfo(\ReflectionParameter $parameter): string
+    private function formatClassInfo(ReflectionParameter $parameter): string
     {
-        return $parameter->getType();
+        return $parameter->getType() ?? 'no type specified';
     }
 }
