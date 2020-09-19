@@ -6,7 +6,9 @@ The format is based on [Keep a
 Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [Unreleased[
+
+## [6.1.0] - 2020-09-19
 
 ### Added
 
@@ -36,3 +38,6 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 - Add a utility template test class. Use it as a sanity check for your
   views.
 - Better type hinting for internal function wrappers.
+
+[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v6.1.0...HEAD
+[6.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v6.0...v6.1.0
