@@ -27,7 +27,7 @@ class PluginLoaderTest extends TestCase
                 $this->anything(),
                 $this->anything(),
                 $this->callback('is_callable')
-        );
+            );
 
         $instance = new PluginLoader(new ParameterResolver($container));
         $dirs     = [dirname(__DIR__).'/resources/plugins'];
