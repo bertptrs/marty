@@ -10,6 +10,7 @@ $config
     ->setUsingCache(true)
     ->setRules([
         '@PSR2'              => true,
+        '@PHP80Migration'    => true,
         'single_quote'       => true,
     ])->setFinder($finder);
 

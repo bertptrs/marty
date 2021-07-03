@@ -50,7 +50,7 @@ class PluginLoader
                 continue;
             }
 
-            list($type, $name, $extension) = explode('.', $file->getBasename());
+            [$type, $name, $extension] = explode('.', $file->getBasename());
 
             $plugin = $this->getPlugin($file, $name, $type);
 

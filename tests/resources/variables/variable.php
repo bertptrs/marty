@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'target' => 'world'
+    'target' => 'world',
 ];
