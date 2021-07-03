@@ -10,7 +10,11 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 
 ### Added
 
-- Added compatibility with PHP 8.0
+- Added compatibility with PHP 8.0.
+
+### Changed
+
+- (internal) replaced Travis CI with Github Actions after travis-ci.org shut down.
 
 ## [6.1.0] - 2020-09-19
 
@@ -23,7 +27,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 - Fixed an issue in PHP 7.4 relating to `ReflectionType` string
   conversion.
 
-## 6.0 - 2019-04-09
+## [6.0] - 2019-04-09
 
 ### Added
 
@@ -35,7 +39,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 - Require Mako 6.0 or compatible
 - Require PHP 7.2
 
-## 5.2.3
+## [5.2.3]
 
 ### Added
 
@@ -43,5 +47,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
   views.
 - Better type hinting for internal function wrappers.
 
-[Unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v6.1.0...HEAD
-[6.1.0]: https://github.com/olivierlacan/keep-a-changelog/compare/v6.0...v6.1.0
+[Unreleased]: https://github.com/bertptrs/marty/compare/v6.1.0...HEAD
+[6.1.0]: https://github.com/bertptrs/marty/compare/v6.0...v6.1.0
+[6.0]: https://github.com/bertptrs/marty/compare/v5.2.3...v6.0
+[5.2.3]: https://github.com/bertptrs/marty/compare/v5.2.2...v5.2.3
