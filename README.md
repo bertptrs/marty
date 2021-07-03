@@ -1,6 +1,12 @@
 # Marty
 
-[![Build Status](https://travis-ci.org/bertptrs/marty.svg)](https://travis-ci.org/bertptrs/marty) [![Latest Stable Version](https://poser.pugx.org/bertptrs/marty/v/stable)](https://packagist.org/packages/bertptrs/marty) [![Total Downloads](https://poser.pugx.org/bertptrs/marty/downloads)](https://packagist.org/packages/bertptrs/marty) [![License](https://poser.pugx.org/bertptrs/marty/license)](https://packagist.org/packages/bertptrs/marty)
+[![Continuous
+Integration](https://github.com/bertptrs/marty/actions/workflows/ci.yml/badge.svg)](https://github.com/bertptrs/marty/actions/workflows/ci.yml)
+[![Latest Stable
+Version](https://poser.pugx.org/bertptrs/marty/v/stable)](https://packagist.org/packages/bertptrs/marty)
+[![Total
+Downloads](https://poser.pugx.org/bertptrs/marty/downloads)](https://packagist.org/packages/bertptrs/marty)
+[![License](https://poser.pugx.org/bertptrs/marty/license)](https://packagist.org/packages/bertptrs/marty)
 
 Marty is a simple Smarty view renderer for the Mako framework.
 
@@ -60,11 +66,11 @@ for details.
 
 The configuration properties are as follows:
 
-| Configuration property | Type     | Description                                         | Default                                                                                              |
-|------------------------|----------|-----------------------------------------------------|------------------------------------------------------------------------------------------------------|
-| smarty.templateDir     | string   | The location to find smarty templates.              | Your `app/views` directory.                                                                          |
-| smarty.compileDir      | string   | The location to store compiled templates.           | A new directory `smarty` in your `app/storage` directory.                                            |
-| smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | An empty array. |
+| Configuration property | Type     | Description                                         | Default                                                   |
+| ---------------------- | -------- | --------------------------------------------------- | --------------------------------------------------------- |
+| smarty.templateDir     | string   | The location to find smarty templates.              | Your `app/views` directory.                               |
+| smarty.compileDir      | string   | The location to store compiled templates.           | A new directory `smarty` in your `app/storage` directory. |
+| smarty.pluginDirs      | string[] | A list of directories to search for smarty plugins. | An empty array.                                           |
 
 ### Plugins
 
