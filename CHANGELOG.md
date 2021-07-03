@@ -8,6 +8,10 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 
 ## [Unreleased]
 
+### Added
+
+- Added compatibility with PHP 8.0
+
 ## [6.1.0] - 2020-09-19
 
 ### Added
