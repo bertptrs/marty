@@ -11,6 +11,8 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 ### Added
 
 - Added compatibility with PHP 8.0.
+- Added compatibility with PHP 8.1.
+- Added support for Mako 8.x.
 
 ### Changed
 
