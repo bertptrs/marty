@@ -13,7 +13,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PluginLoaderTest extends TestCase
 {
-
     /**
      * Test whether the test plugin actually can be loaded using the loader.
      */

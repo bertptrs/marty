@@ -13,7 +13,6 @@ use ReflectionClass;
  */
 class MartyPackageTest extends TestCase
 {
-
     /**
      * Test whether the bootstrap method of the package works according to
      * spec.
@@ -37,14 +36,14 @@ class MartyPackageTest extends TestCase
             ->disableOriginalConstructor()->getMock();
         $container->expects($this->once())->method('get')->will($this->returnCallback(function ($item) use ($viewFactory) {
             switch ($item) {
-            case 'config':
-                return null;
+                case 'config':
+                    return null;
 
-            case 'view':
-                return $viewFactory;
+                case 'view':
+                    return $viewFactory;
 
-            default:
-                $this->fail("Unneccsary item requested: $item");
+                default:
+                    $this->fail("Unneccsary item requested: $item");
             }
         }));
         // Ensure that it the Smarty class is registered.
