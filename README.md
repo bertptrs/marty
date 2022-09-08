@@ -14,7 +14,7 @@ Marty is a simple Smarty view renderer for the Mako framework.
 
 Marty has been tested on all current Mako versions. Any other version
 _may_ work, but has not been tested. Unit tests are run against PHP 7.0
-and up. Smarty 3 is required, but will be pulled in as part of the
+and up. Smarty 3 or 4 is required, but will be pulled in as part of the
 installation.
 
 ## Installation

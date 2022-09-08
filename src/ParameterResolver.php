@@ -43,12 +43,12 @@ class ParameterResolver
     private function resolveDIParameter(ReflectionParameter $parameter)
     {
         try {
-            $class = $parameter->getClass();
-            if ($class == null) {
+            $type = $parameter->getType();
+            if ($type == null) {
                 throw new UnresolvableParameterException($parameter);
             }
 
-            return $this->container->get($class->getName());
+            return $this->container->get($type->getName());
         } catch (\Throwable $ex) {
             throw new UnresolvableParameterException($parameter, $ex);
         }
