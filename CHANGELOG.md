@@ -8,11 +8,14 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 
 ## [Unreleased]
 
+## [6.2.0]
+
 ### Added
 
 - Added compatibility with PHP 8.0.
 - Added compatibility with PHP 8.1.
 - Added support for Mako 8.x.
+- Added support for Smarty 4.x
 
 ### Changed
 
@@ -49,7 +52,8 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
   views.
 - Better type hinting for internal function wrappers.
 
-[Unreleased]: https://github.com/bertptrs/marty/compare/v6.1.0...HEAD
+[Unreleased]: https://github.com/bertptrs/marty/compare/v6.2.0...HEAD
+[6.1.0]: https://github.com/bertptrs/marty/compare/v6.1.0...v6.2.0
 [6.1.0]: https://github.com/bertptrs/marty/compare/v6.0...v6.1.0
 [6.0]: https://github.com/bertptrs/marty/compare/v5.2.3...v6.0
 [5.2.3]: https://github.com/bertptrs/marty/compare/v5.2.2...v5.2.3
