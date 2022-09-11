@@ -53,7 +53,7 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 - Better type hinting for internal function wrappers.
 
 [Unreleased]: https://github.com/bertptrs/marty/compare/v6.2.0...HEAD
-[6.1.0]: https://github.com/bertptrs/marty/compare/v6.1.0...v6.2.0
+[6.2.0]: https://github.com/bertptrs/marty/compare/v6.1.0...v6.2.0
 [6.1.0]: https://github.com/bertptrs/marty/compare/v6.0...v6.1.0
 [6.0]: https://github.com/bertptrs/marty/compare/v5.2.3...v6.0
 [5.2.3]: https://github.com/bertptrs/marty/compare/v5.2.2...v5.2.3
